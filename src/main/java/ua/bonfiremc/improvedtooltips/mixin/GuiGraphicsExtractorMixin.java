@@ -3,8 +3,10 @@ package ua.bonfiremc.improvedtooltips.mixin;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.network.chat.contents.PlainTextContents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import org.jspecify.annotations.Nullable;
@@ -57,7 +59,13 @@ public abstract class GuiGraphicsExtractorMixin implements ColorExtractor {
     @Unique
     private void improvedTooltips$setColor(List<Component> lines) {
         if (!lines.isEmpty()) {
-            TextColor color = lines.getFirst().getStyle().getColor();
+            Component component = lines.getFirst();
+
+            TextColor color = component.getStyle().getColor();
+
+            if ((color == null || color.getValue() == 0xFFFFFF) && component.getSiblings().size() == 1) {
+                color = component.getSiblings().getFirst().getStyle().getColor();
+            }
 
             if (color != null) {
                 this.color = color.getValue() | 0xFF000000;

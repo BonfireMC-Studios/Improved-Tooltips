@@ -11,5 +11,6 @@
     },
     "overwrites": {
         "requireAnnotations": true
-    }
+    },
+    "mixins": [ "ItemStackMixin" ]
 }
