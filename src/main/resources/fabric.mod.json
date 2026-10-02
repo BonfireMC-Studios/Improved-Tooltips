@@ -1,0 +1,30 @@
+{
+    "schemaVersion": 1,
+    "id": "improved-tooltips",
+    "version": "${version}",
+    "name": "Improved Tooltips",
+    "description": "",
+    "authors": [
+        "Bonfire Studios"
+    ],
+    "contact": {
+        "sources": "https://github.com/BonfireMC-Studios/Improved-Tooltips",
+        "issues": "https://github.com/BonfireMC-Studios/Improved-Tooltips/issues"
+    },
+    "license": "LGPL-3.0",
+    "icon": "assets/improvedtooltips/icon.png",
+    "environment": "client",
+    "entrypoints": {
+        "client": [
+            "ua.bonfiremc.improvedtooltips.ImprovedTooltips"
+        ]
+    },
+    "mixins": [
+        "improved-tooltips.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=${fabric_loader_version}",
+        "fabric-api": "*",
+        "minecraft": ">=${minecraft_version}"
+    }
+}
