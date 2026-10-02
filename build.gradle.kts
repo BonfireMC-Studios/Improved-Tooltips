@@ -7,11 +7,23 @@ val modVersion: String = "1.0.0"
 version = "$modVersion+${libs.versions.minecraft.get()}"
 group = "ua.bonfiremc"
 
+loom {
+    accessWidenerPath = file("src/main/resources/improvedtooltips.accesswidener")
+}
+
+repositories {
+    maven("https://maven.isxander.dev/releases")
+    maven("https://maven.terraformersmc.com/")
+}
+
 dependencies {
     minecraft(libs.minecraft)
 
     implementation(libs.fabric.loader)
     implementation(libs.fabric.api)
+
+    implementation(libs.yacl)
+    implementation(libs.modmenu)
 }
 
 java {

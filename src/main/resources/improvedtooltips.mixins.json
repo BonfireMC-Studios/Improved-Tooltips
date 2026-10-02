@@ -2,8 +2,9 @@
     "required": true,
     "minVersion": "0.8",
     "package": "ua.bonfiremc.improvedtooltips.mixin",
-    "compatibilityLevel": "JAVA_25",\
+    "compatibilityLevel": "JAVA_25",
     "client": [
+        "GuiGraphicsExtractorMixin", "TooltipRenderUtilMixin"
     ],
     "injectors": {
         "defaultRequire": 1

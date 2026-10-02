@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "improved-tooltips",
+    "id": "improvedtooltips",
     "version": "${version}",
     "name": "Improved Tooltips",
     "description": "",
@@ -20,8 +20,9 @@
         ]
     },
     "mixins": [
-        "improved-tooltips.mixins.json"
+        "improvedtooltips.mixins.json"
     ],
+    "accessWidener": "improvedtooltips.accesswidener",
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",
         "fabric-api": "*",
