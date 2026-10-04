@@ -1,5 +1,6 @@
 package ua.bonfiremc.improvedtooltips.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.core.component.DataComponentMap;
@@ -17,8 +18,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import ua.bonfiremc.improvedtooltips.component.ComposeTooltip;
 import ua.bonfiremc.improvedtooltips.event.TooltipImageCallback;
 import ua.bonfiremc.improvedtooltips.event.TooltipImageEvents;
@@ -36,9 +35,11 @@ public abstract class ItemStackMixin {
     @Shadow
     public abstract DataComponentMap getComponents();
 
-    @Inject(method = "getTooltipImage", at = @At("HEAD"), cancellable = true)
-    public void improvedTooltips$overrideTooltip(CallbackInfoReturnable<Optional<TooltipComponent>> cir) {
+    @ModifyReturnValue(method = "getTooltipImage", at = @At("RETURN"))
+    public Optional<TooltipComponent> improvedTooltips$overrideTooltip(Optional<TooltipComponent> original) {
         List<TooltipComponent> components = new ArrayList<>();
+
+        original.ifPresent(components::add);
 
         for (TypedDataComponent<?> typedComponent : this.getComponents()) {
             TooltipComponent component = this.getTooltipComponent(typedComponent);
@@ -48,12 +49,14 @@ public abstract class ItemStackMixin {
             }
         }
 
-        if (!components.isEmpty()) {
-            cir.setReturnValue(Optional.of(components.size() == 1
-                ? components.getFirst()
-                : new ComposeTooltip(components)
-            ));
+        if (components.isEmpty()) {
+            return Optional.empty();
         }
+
+        return Optional.of(components.size() > 1
+            ? new ComposeTooltip(components)
+            : components.getFirst()
+        );
     }
 
     @Unique

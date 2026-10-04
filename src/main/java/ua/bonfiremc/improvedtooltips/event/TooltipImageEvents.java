@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +32,7 @@ public class TooltipImageEvents {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> @Nullable Event<TooltipImageCallback<T>> get(DataComponentType<T> componentType) {
+    public static <T> Event<TooltipImageCallback<T>> get(DataComponentType<T> componentType) {
         return (Event<TooltipImageCallback<T>>) COMPONENT_TO_CALLBACK.get(componentType);
     }
 }
