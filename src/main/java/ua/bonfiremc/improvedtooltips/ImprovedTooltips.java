@@ -2,15 +2,19 @@ package ua.bonfiremc.improvedtooltips;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.ClientTooltipComponentCallback;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
-import ua.bonfiremc.improvedtooltips.component.BeesAndHoneyPreviewTooltip;
-import ua.bonfiremc.improvedtooltips.component.ContainerPreviewTooltip;
-import ua.bonfiremc.improvedtooltips.component.FoodPreviewTooltip;
-import ua.bonfiremc.improvedtooltips.component.MapPreviewTooltip;
-import ua.bonfiremc.improvedtooltips.component.client.ClientBeesAndHoneyPreviewTooltip;
-import ua.bonfiremc.improvedtooltips.component.client.ClientContainerPreviewTooltip;
-import ua.bonfiremc.improvedtooltips.component.client.ClientFoodPreviewTooltip;
-import ua.bonfiremc.improvedtooltips.component.client.ClientMapPreviewTooltip;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Items;
+import org.jspecify.annotations.Nullable;
+import ua.bonfiremc.improvedtooltips.component.*;
+import ua.bonfiremc.improvedtooltips.component.client.*;
+import ua.bonfiremc.improvedtooltips.event.TooltipImageEvents;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ImprovedTooltips implements ClientModInitializer {
     public static Identifier id(String path) {
@@ -19,12 +23,59 @@ public class ImprovedTooltips implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ClientTooltipComponentCallback.EVENT.register(component -> switch (component) {
+        ClientTooltipComponentCallback.EVENT.register(this::toClientComponent);
+
+        TooltipImageEvents.getOrCreate(DataComponents.FOOD).register((stack, component) ->
+            stack.getComponents().has(DataComponents.CONSUMABLE)
+                ? new FoodPreviewTooltip(component.nutrition(), Math.round(component.saturation()))
+                : null
+        );
+        TooltipImageEvents.getOrCreate(DataComponents.MAP_ID).register((_, component) ->
+            new MapPreviewTooltip(component)
+        );
+        TooltipImageEvents.getOrCreate(DataComponents.CONTAINER).register((stack, component) -> {
+            boolean isShulkerBox = stack.is(Items.SHULKER_BOX);
+            boolean isDyedSB = Items.DYED_SHULKER_BOX.asList().contains(stack.getItem());
+
+            if (isShulkerBox || isDyedSB) {
+                int color = 0xFF976797;
+
+                if (isDyedSB) {
+                    for (DyeColor dye : DyeColor.values()) {
+                        if (Items.DYED_SHULKER_BOX.pick(dye) == stack.getItem()) {
+                            color = dye.getTextureDiffuseColor();
+                            break;
+                        }
+                    }
+                }
+
+                return new ContainerPreviewTooltip(component, 9, 3, color);
+            }
+
+            return null;
+        });
+        TooltipImageEvents.getOrCreate(DataComponents.PAINTING_VARIANT).register((_, component) ->
+            new PaintingPreviewTooltip(component.value())
+        );
+    }
+
+    private @Nullable ClientTooltipComponent toClientComponent(TooltipComponent component) {
+        return switch (component) {
             case BeesAndHoneyPreviewTooltip tooltip -> new ClientBeesAndHoneyPreviewTooltip(tooltip);
             case ContainerPreviewTooltip tooltip -> new ClientContainerPreviewTooltip(tooltip);
             case FoodPreviewTooltip tooltip -> new ClientFoodPreviewTooltip(tooltip);
             case MapPreviewTooltip tooltip -> new ClientMapPreviewTooltip(tooltip);
+            case PaintingPreviewTooltip tooltip -> new ClientPaintingPreviewTooltip(tooltip);
+            case ComposeTooltip tooltip -> {
+                List<ClientTooltipComponent> tooltips = new ArrayList<>();
+
+                for (TooltipComponent c : tooltip.components()) {
+                    tooltips.add(this.toClientComponent(c));
+                }
+
+                yield new ClientComposeTooltip(tooltips);
+            }
             default -> null;
-        });
+        };
     }
 }
