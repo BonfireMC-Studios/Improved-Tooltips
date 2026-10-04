@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.ClientTooltipComponentCallbac
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
@@ -64,6 +65,15 @@ public class ImprovedTooltips implements ClientModInitializer {
         TooltipImageEvents.getOrCreate(DataComponents.MAP_ID).register((_, component) ->
             new MapPreviewTooltip(component)
         );
+        TooltipImageEvents.getOrCreate(DataComponents.POTION_CONTENTS).register((stack, component) -> {
+            List<MobEffectInstance> effects = new ArrayList<>();
+
+            for (MobEffectInstance effect : component.getAllEffects()) {
+                effects.add(effect);
+            }
+
+            return new MobEffectsPreviewTooltip(effects, stack.getComponents().getOrDefault(DataComponents.POTION_DURATION_SCALE, 1f));
+        });
         TooltipImageEvents.getOrCreate(DataComponents.PAINTING_VARIANT).register((_, component) ->
             new PaintingPreviewTooltip(component.value())
         );
@@ -75,7 +85,8 @@ public class ImprovedTooltips implements ClientModInitializer {
             case ContainerPreviewTooltip tooltip -> new ClientContainerPreviewTooltip(tooltip.contents(), tooltip.cols(), tooltip.rows(), tooltip.color());
             case FoodPreviewTooltip tooltip -> new ClientFoodPreviewTooltip(tooltip.nutrition(), tooltip.saturation());
             case HoneyPreviewTooltip tooltip -> new ClientHoneyPreviewTooltip(tooltip.honey(), tooltip.maxHoney());
-            case MapPreviewTooltip tooltip -> new ClientMapPreviewTooltip(tooltip.mapId());
+            case MapPreviewTooltip tooltip -> new ClientMapPreviewTooltip(tooltip.id());
+            case MobEffectsPreviewTooltip tooltip -> new ClientMobEffectsPreviewTooltip(tooltip.effects(), tooltip.durationScale());
             case PaintingPreviewTooltip tooltip -> new ClientPaintingPreviewTooltip(tooltip.variant());
 
             case ComposeTooltip tooltip -> {

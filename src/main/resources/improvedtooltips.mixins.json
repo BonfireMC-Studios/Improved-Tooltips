@@ -12,5 +12,5 @@
     "overwrites": {
         "requireAnnotations": true
     },
-    "mixins": [ "ItemStackMixin", "hide_tooltips.BeesMixin", "hide_tooltips.BlockItemStatePropertiesMixin" ]
+    "mixins": [ "ItemStackMixin", "hide_tooltips.BeesMixin", "hide_tooltips.BlockItemStatePropertiesMixin", "hide_tooltips.HangingEntityItemMixin", "hide_tooltips.PotionContentsMixin" ]
 }

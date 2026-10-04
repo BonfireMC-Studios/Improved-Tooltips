@@ -18,16 +18,16 @@ import ua.bonfiremc.improvedtooltips.ImprovedTooltips;
 public class ClientMapPreviewTooltip implements ClientTooltipComponent {
     private static final Identifier MAP_BACKGROUND = ImprovedTooltips.id("extended_map_background");
 
-    private final MapId mapId;
+    private final MapId id;
     private final MapItemSavedData data;
 
-    public ClientMapPreviewTooltip(MapId mapId) {
-        this.mapId = mapId;
+    public ClientMapPreviewTooltip(MapId id) {
+        this.id = id;
 
         Level level = Minecraft.getInstance().level;
 
         this.data = level != null
-            ? MapItem.getSavedData(mapId, level)
+            ? MapItem.getSavedData(id, level)
             : null;
     }
 
@@ -45,7 +45,7 @@ public class ClientMapPreviewTooltip implements ClientTooltipComponent {
         stack.pushMatrix();
         stack.translate(x + 6, y + 6);
 
-        Minecraft.getInstance().getMapRenderer().extractRenderState(this.mapId, this.data, state);
+        Minecraft.getInstance().getMapRenderer().extractRenderState(this.id, this.data, state);
 
         graphics.map(state);
 
