@@ -18,25 +18,9 @@ public class ClientFoodPreviewTooltip implements ClientTooltipComponent {
     private final int nutrition;
     private final int saturation;
 
-    private final int width;
-    private final int height;
-
     public ClientFoodPreviewTooltip(int nutrition, int saturation) {
         this.nutrition = nutrition;
         this.saturation = saturation;
-
-        this.width = Math.max(
-            (this.nutrition + 1) / 2 * 9,
-            (this.saturation + 1) / 2 * 9
-        );
-
-        int height = 0;
-
-        if (this.nutrition > 0) height += 9;
-        if (this.saturation > 0) height += 9;
-        if (this.nutrition > 0 && this.saturation > 0) height += 2;
-
-        this.height = height;
     }
 
     @Override
@@ -66,11 +50,20 @@ public class ClientFoodPreviewTooltip implements ClientTooltipComponent {
 
     @Override
     public int getWidth(@NonNull Font font) {
-        return this.width;
+        return Math.max(
+            (this.nutrition + 1) / 2 * 9,
+            (this.saturation + 1) / 2 * 9
+        );
     }
 
     @Override
     public int getHeight(@NonNull Font font) {
-        return this.height + 2;
+        int height = 0;
+
+        if (this.nutrition > 0) height += 9;
+        if (this.saturation > 0) height += 9;
+        if (this.nutrition > 0 && this.saturation > 0) height += 2;
+
+        return height + 2;
     }
 }
