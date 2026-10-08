@@ -8,6 +8,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 import org.jspecify.annotations.NonNull;
+import ua.bonfiremc.improvedtooltips.ITConfig;
 import ua.bonfiremc.improvedtooltips.ImprovedTooltips;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class ClientContainerPreviewTooltip implements ClientTooltipComponent {
 
         this.cols = cols;
         this.rows = rows;
-        this.color = color;
+        this.color = ITConfig.instance().coloredShulkerBoxContainer ? color : -1;
 
         this.width = this.cols * 18 + 7 * 2;
         this.height = this.rows * 18 + 7 * 2;

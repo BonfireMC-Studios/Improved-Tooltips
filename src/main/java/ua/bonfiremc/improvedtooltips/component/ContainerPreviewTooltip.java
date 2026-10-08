@@ -6,6 +6,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ItemContainerContents;
+import ua.bonfiremc.improvedtooltips.ITConfig;
 
 import java.util.Optional;
 
@@ -14,6 +15,8 @@ public record ContainerPreviewTooltip(ItemContainerContents contents, int cols, 
         ItemContainerContents contents = stack.get(DataComponents.CONTAINER);
 
         if (contents != null) {
+            if (!ITConfig.instance().emptyShulkerBoxContent && contents.size() == 0) return Optional.empty();
+
             boolean isShulkerBox = stack.is(Items.SHULKER_BOX);
             boolean isDyedSB = Items.DYED_SHULKER_BOX.asList().contains(stack.getItem());
 

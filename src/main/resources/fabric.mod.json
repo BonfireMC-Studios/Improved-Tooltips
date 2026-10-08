@@ -17,6 +17,9 @@
     "entrypoints": {
         "client": [
             "ua.bonfiremc.improvedtooltips.ImprovedTooltips"
+        ],
+        "modmenu": [
+            "ua.bonfiremc.improvedtooltips.ModMenuIntegration"
         ]
     },
     "mixins": [

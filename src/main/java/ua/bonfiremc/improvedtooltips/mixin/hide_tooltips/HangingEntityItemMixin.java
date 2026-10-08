@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import ua.bonfiremc.improvedtooltips.ITConfig;
 
 import java.util.function.Consumer;
 
@@ -17,6 +18,8 @@ import java.util.function.Consumer;
 public class HangingEntityItemMixin {
     @Inject(method = "appendHoverText", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/decoration/painting/PaintingVariant;title()Ljava/util/Optional;"), cancellable = true)
     public void hideTooltip(ItemStack itemStack, Item.TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag, CallbackInfo ci) {
-        ci.cancel();
+        if (ITConfig.instance().paintingPreview) {
+            ci.cancel();
+        }
     }
 }

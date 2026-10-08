@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import ua.bonfiremc.improvedtooltips.ITConfig;
 
 import java.util.function.Consumer;
 
@@ -14,6 +15,8 @@ import java.util.function.Consumer;
 public class PotionContentsMixin {
     @Inject(method = "addPotionTooltip", at = @At(value = "INVOKE", target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V", ordinal = 0), cancellable = true)
     private static void hideTooltip(Iterable<MobEffectInstance> effects, Consumer<Component> lines, float durationScale, float tickrate, CallbackInfo ci) {
-        ci.cancel();
+        if (ITConfig.instance().mobEffectsPreview) {
+            ci.cancel();
+        }
     }
 }

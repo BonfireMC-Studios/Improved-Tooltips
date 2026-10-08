@@ -10,6 +10,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import ua.bonfiremc.improvedtooltips.ITConfig;
+import ua.bonfiremc.improvedtooltips.ImprovedTooltips;
 import ua.bonfiremc.improvedtooltips.goose.ColorExtractor;
 
 @Mixin(TooltipRenderUtil.class)
@@ -24,8 +26,8 @@ public class TooltipRenderUtilMixin {
 
     @Redirect(method = "extractTooltipBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blitSprite(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V"))
     private static void improvedTooltips$changeTooltipColor(GuiGraphicsExtractor instance, RenderPipeline renderPipeline, Identifier location, int x, int y, int width, int height) {
-        if (instance instanceof ColorExtractor extractor && improvedTooltips$isDefaultTooltip(location)) {
-            instance.blitSprite(renderPipeline, Identifier.fromNamespaceAndPath("improvedtooltips", location.getPath()), x, y, width, height, extractor.improvedTooltips$getTooltipColor());
+        if (ITConfig.instance().coloredTooltips && instance instanceof ColorExtractor extractor && improvedTooltips$isDefaultTooltip(location)) {
+            instance.blitSprite(renderPipeline, ImprovedTooltips.id(location.getPath()), x, y, width, height, extractor.improvedTooltips$getTooltipColor());
         } else {
             instance.blitSprite(renderPipeline, location, x, y, width, height);
         }

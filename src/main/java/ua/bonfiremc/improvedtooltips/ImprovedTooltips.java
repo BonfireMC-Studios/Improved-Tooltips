@@ -19,17 +19,34 @@ public class ImprovedTooltips implements ClientModInitializer {
     }
 
     public static void addComponents(ItemStack stack, Consumer<TooltipComponent> consumer) {
-        BeesPreviewTooltip.of(stack).ifPresent(consumer);
-        ContainerPreviewTooltip.of(stack).ifPresent(consumer);
-        FoodPreviewTooltip.of(stack).ifPresent(consumer);
-        HoneyPreviewTooltip.of(stack).ifPresent(consumer);
-        MapPreviewTooltip.of(stack).ifPresent(consumer);
-        MobEffectsPreviewTooltip.of(stack).ifPresent(consumer);
-        PaintingPreviewTooltip.of(stack).ifPresent(consumer);
+        ITConfig config = ITConfig.instance();
+
+        if (config.beesPreview) {
+            BeesPreviewTooltip.of(stack).ifPresent(consumer);
+        }
+        if (config.shulkerBoxContentPreview) {
+            ContainerPreviewTooltip.of(stack).ifPresent(consumer);
+        }
+        if (config.foodPreview) {
+            FoodPreviewTooltip.of(stack).ifPresent(consumer);
+        }
+        if (config.honeyPreview) {
+            HoneyPreviewTooltip.of(stack).ifPresent(consumer);
+        }
+        if (config.mapPreview) {
+            MapPreviewTooltip.of(stack).ifPresent(consumer);
+        }
+        if (config.mobEffectsPreview) {
+            MobEffectsPreviewTooltip.of(stack).ifPresent(consumer);
+        }
+        if (config.paintingPreview) {
+            PaintingPreviewTooltip.of(stack).ifPresent(consumer);
+        }
     }
 
     @Override
     public void onInitializeClient() {
+        ITConfig.HANDLER.load();
         ClientTooltipComponentCallback.EVENT.register(this::toClientComponent);
     }
 

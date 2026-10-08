@@ -13,6 +13,7 @@ import net.minecraft.world.item.component.TooltipDisplay;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import ua.bonfiremc.improvedtooltips.ITConfig;
 import ua.bonfiremc.improvedtooltips.ImprovedTooltips;
 import ua.bonfiremc.improvedtooltips.component.ComposeTooltip;
 
@@ -46,6 +47,10 @@ public abstract class ItemStackMixin {
 
     @WrapWithCondition(method = "addDetailsToTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;addToTooltip(Lnet/minecraft/core/component/DataComponentType;Lnet/minecraft/world/item/Item$TooltipContext;Lnet/minecraft/world/item/component/TooltipDisplay;Ljava/util/function/Consumer;Lnet/minecraft/world/item/TooltipFlag;)V", ordinal = 5))
     public boolean improvedTooltips$hideContainerDetails1(ItemStack instance, DataComponentType<?> type, Item.TooltipContext context, TooltipDisplay display, Consumer<Component> consumer, TooltipFlag flag) {
-        return this.getItem() != Items.SHULKER_BOX && !Items.DYED_SHULKER_BOX.asList().contains(this.getItem());
+        if (ITConfig.instance().shulkerBoxContentPreview) {
+            return this.getItem() != Items.SHULKER_BOX && !Items.DYED_SHULKER_BOX.asList().contains(this.getItem());
+        }
+
+        return true;
     }
 }

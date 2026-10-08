@@ -13,6 +13,7 @@ import net.minecraft.world.level.saveddata.maps.MapId;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.joml.Matrix3x2fStack;
 import org.jspecify.annotations.NonNull;
+import ua.bonfiremc.improvedtooltips.ITConfig;
 import ua.bonfiremc.improvedtooltips.ImprovedTooltips;
 
 public class ClientMapPreviewTooltip implements ClientTooltipComponent {
@@ -20,6 +21,8 @@ public class ClientMapPreviewTooltip implements ClientTooltipComponent {
 
     private final MapId id;
     private final MapItemSavedData data;
+
+    private final boolean renderBackground = ITConfig.instance().mapBackground;
 
     public ClientMapPreviewTooltip(MapId id) {
         this.id = id;
@@ -37,13 +40,17 @@ public class ClientMapPreviewTooltip implements ClientTooltipComponent {
             return;
         }
 
-        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, MAP_BACKGROUND, x, y, 140, 140);
+        if (this.renderBackground) {
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, MAP_BACKGROUND, x, y, 140, 140);
+        }
 
         MapRenderState state = new MapRenderState();
         Matrix3x2fStack stack = graphics.pose();
 
+        int padding = this.renderBackground ? 6 : 0;
+
         stack.pushMatrix();
-        stack.translate(x + 6, y + 6);
+        stack.translate(x + padding, y + padding);
 
         Minecraft.getInstance().getMapRenderer().extractRenderState(this.id, this.data, state);
 
@@ -54,11 +61,11 @@ public class ClientMapPreviewTooltip implements ClientTooltipComponent {
 
     @Override
     public int getWidth(@NonNull Font font) {
-        return 140;
+        return this.renderBackground ? 140 : 128;
     }
 
     @Override
     public int getHeight(@NonNull Font font) {
-        return 142;
+        return this.renderBackground ? 142 : 130;
     }
 }
