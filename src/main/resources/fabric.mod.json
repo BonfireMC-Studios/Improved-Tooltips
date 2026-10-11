@@ -3,7 +3,7 @@
     "id": "improvedtooltips",
     "version": "${version}",
     "name": "Improved Tooltips",
-    "description": "",
+    "description": "Small improvements for tooltips",
     "authors": [
         "Bonfire Studios"
     ],
