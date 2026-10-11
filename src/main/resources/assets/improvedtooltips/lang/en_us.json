@@ -1,0 +1,25 @@
+{
+    "yacl3.config.improvedtooltips:config.category.general": "General",
+
+    "yacl3.config.improvedtooltips:config.category.general.group.shulker_box": "Shulker Box",
+    "yacl3.config.improvedtooltips:config.shulkerBoxContentPreview": "Show shulker box content",
+    "yacl3.config.improvedtooltips:config.emptyShulkerBoxContent": "Show shulker box content when empty",
+    "yacl3.config.improvedtooltips:config.coloredShulkerBoxContainer": "Use colored shulker box texture",
+
+    "yacl3.config.improvedtooltips:config.category.general.group.food": "Food",
+    "yacl3.config.improvedtooltips:config.foodPreview": "Show food nutrition",
+    "yacl3.config.improvedtooltips:config.saturationPreview": "Show food saturation",
+
+    "yacl3.config.improvedtooltips:config.category.general.group.map": "Map",
+    "yacl3.config.improvedtooltips:config.mapPreview": "Show map preview",
+    "yacl3.config.improvedtooltips:config.mapBackground": "Show map background under preview",
+
+    "yacl3.config.improvedtooltips:config.category.general.group.bees_and_honey": "Bees & Honey",
+    "yacl3.config.improvedtooltips:config.beesPreview": "Show bee count",
+    "yacl3.config.improvedtooltips:config.honeyPreview": "Show honey level",
+
+    "yacl3.config.improvedtooltips:config.category.general.group.misc": "Misc",
+    "yacl3.config.improvedtooltips:config.coloredTooltips": "Use colored tooltips",
+    "yacl3.config.improvedtooltips:config.mobEffectsPreview": "Show icons near mob effect description",
+    "yacl3.config.improvedtooltips:config.paintingPreview": "Show painting preview"
+}

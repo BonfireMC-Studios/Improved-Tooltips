@@ -1,0 +1,25 @@
+{
+    "yacl3.config.improvedtooltips:config.category.general": "Загальне",
+
+    "yacl3.config.improvedtooltips:config.category.general.group.shulker_box": "Шалкерова коробка",
+    "yacl3.config.improvedtooltips:config.shulkerBoxContentPreview": "Показувати вміст шалкерової коробки",
+    "yacl3.config.improvedtooltips:config.emptyShulkerBoxContent": "Показувати вміст порожньої шалкерової коробки",
+    "yacl3.config.improvedtooltips:config.coloredShulkerBoxContainer": "Використовувати кольорову текстуру шалкерової коробки",
+
+    "yacl3.config.improvedtooltips:config.category.general.group.food": "Їжа",
+    "yacl3.config.improvedtooltips:config.foodPreview": "Показувати поживність їжі",
+    "yacl3.config.improvedtooltips:config.saturationPreview": "Показувати насиченість їжі",
+
+    "yacl3.config.improvedtooltips:config.category.general.group.map": "Мапа",
+    "yacl3.config.improvedtooltips:config.mapPreview": "Показувати попередній перегляд мапи",
+    "yacl3.config.improvedtooltips:config.mapBackground": "Тло мапи під попереднім переглядом",
+
+    "yacl3.config.improvedtooltips:config.category.general.group.bees_and_honey": "Бджоли та мед",
+    "yacl3.config.improvedtooltips:config.beesPreview": "Показувати кількість бджіл",
+    "yacl3.config.improvedtooltips:config.honeyPreview": "Показувати рівень меду",
+
+    "yacl3.config.improvedtooltips:config.category.general.group.misc": "Інше",
+    "yacl3.config.improvedtooltips:config.coloredTooltips": "Використовувати кольорові підказки",
+    "yacl3.config.improvedtooltips:config.mobEffectsPreview": "Показувати іконки біля опису ефекту моба",
+    "yacl3.config.improvedtooltips:config.paintingPreview": "Показувати попередній перегляд картини"
+}
