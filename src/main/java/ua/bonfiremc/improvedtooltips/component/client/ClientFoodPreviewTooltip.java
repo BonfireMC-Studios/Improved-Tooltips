@@ -2,14 +2,12 @@ package ua.bonfiremc.improvedtooltips.component.client;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 import ua.bonfiremc.improvedtooltips.ITConfig;
 import ua.bonfiremc.improvedtooltips.ImprovedTooltips;
 
-public class ClientFoodPreviewTooltip implements ClientTooltipComponent {
+public class ClientFoodPreviewTooltip extends ClientTooltipBase {
     public static final Identifier NUTRITION_FULL = Identifier.withDefaultNamespace("hud/food_full");
     public static final Identifier NUTRITION_HALF = Identifier.withDefaultNamespace("hud/food_half");
 
@@ -32,9 +30,7 @@ public class ClientFoodPreviewTooltip implements ClientTooltipComponent {
             int offset = ((i - 1) / 2) * 9;
 
             if (i <= this.nutrition) {
-                graphics.blitSprite(
-                    RenderPipelines.GUI_TEXTURED,
-                    i < this.nutrition ? NUTRITION_FULL : NUTRITION_HALF,
+                sprite(graphics, i < this.nutrition ? NUTRITION_FULL : NUTRITION_HALF,
                     x + offset, y,
                     9, 9
                 );
@@ -42,9 +38,7 @@ public class ClientFoodPreviewTooltip implements ClientTooltipComponent {
 
             if (this.renderSaturation) {
                 if (i <= this.saturation) {
-                    graphics.blitSprite(
-                        RenderPipelines.GUI_TEXTURED,
-                        i < this.saturation ? SATURATION_FULL : SATURATION_HALF,
+                    sprite(graphics, i < this.saturation ? SATURATION_FULL : SATURATION_HALF,
                         x + offset, y + (this.nutrition > 0 ? 11 : 0),
                         9, 9
                     );

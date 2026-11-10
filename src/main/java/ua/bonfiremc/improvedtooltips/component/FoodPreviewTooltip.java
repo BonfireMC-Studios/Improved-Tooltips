@@ -12,7 +12,10 @@ public record FoodPreviewTooltip(int nutrition, int saturation) implements Toolt
     public static Optional<TooltipComponent> of(ItemStack stack) {
         FoodProperties food = stack.get(DataComponents.FOOD);
 
+        //? if >=1.21.2 {
         if (food != null && stack.has(DataComponents.CONSUMABLE)) {
+        //?} else
+        /*if (food != null) {*/
             int nutrition = food.nutrition();
             int saturation = Math.round(food.saturation());
 

@@ -1,25 +1,54 @@
 [versions]
 
-minecraft = "26.3"
-
 fabric-loader = "0.19.5"
-fabric-api = "0.161.0+26.3"
-
-yacl = "3.9.7+26.3-fabric"
-modmenu = "21.0.0"
-
 fabric-loom = "1.18-SNAPSHOT"
+jspecify = "1.0.0"
+
+
+mc1211-minecraft = "1.21.1"
+mc1211-fabric-api = "0.116.18+1.21.1"
+mc1211-yacl = "3.8.2+1.21.1-fabric"
+mc1211-modmenu = "11.0.5"
+
+mc1214-minecraft = "1.21.4"
+mc1214-fabric-api = "0.119.4+1.21.4"
+mc1214-yacl = "3.8.2+1.21.4-fabric"
+mc1214-modmenu = "13.0.4"
+
+mc12110-minecraft = "1.21.10"
+mc12110-fabric-api = "0.138.4+1.21.10"
+mc12110-yacl = "3.8.2+1.21.10-fabric"
+mc12110-modmenu = "16.0.1"
+
+mc12111-minecraft = "1.21.11"
+mc12111-fabric-api = "0.141.6+1.21.11"
+mc12111-yacl = "3.8.2+1.21.11-fabric"
+mc12111-modmenu = "17.0.1"
+
+mc261-minecraft = "26.1.2"
+mc261-fabric-api = "0.155.3+26.1.2"
+mc261-yacl = "3.9.7+26.1-fabric"
+mc261-modmenu = "18.0.2"
+
+mc262-minecraft = "26.2"
+mc262-fabric-api = "0.161.0+26.2"
+mc262-yacl = "3.9.7+26.2-fabric"
+mc262-modmenu = "20.0.3"
+
+mc263-minecraft = "26.3"
+mc263-fabric-api = "0.161.0+26.3"
+mc263-yacl = "3.9.7+26.3-fabric"
+mc263-modmenu = "21.0.0"
 
 [libraries]
 
-minecraft = { module = "net.minecraft:minecraft", version.ref = "minecraft" }
-
 fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
-fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
-
-yacl = { module = "dev.isxander:yet-another-config-lib", version.ref = "yacl" }
-modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
+fabric-api = { module = "net.fabricmc.fabric-api:fabric-api" }
+yacl = { module = "dev.isxander:yet-another-config-lib" }
+modmenu = { module = "com.terraformersmc:modmenu" }
+jspecify = { module = "org.jspecify:jspecify", version.ref = "jspecify" }
 
 [plugins]
 
 fabric-loom = { id = "net.fabricmc.fabric-loom", version.ref = "fabric-loom" }
+fabric-loom-remap = { id = "net.fabricmc.fabric-loom-remap", version.ref = "fabric-loom" }

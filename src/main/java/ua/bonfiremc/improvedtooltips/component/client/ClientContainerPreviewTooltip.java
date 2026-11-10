@@ -2,8 +2,6 @@ package ua.bonfiremc.improvedtooltips.component.client;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
@@ -13,7 +11,7 @@ import ua.bonfiremc.improvedtooltips.ImprovedTooltips;
 
 import java.util.List;
 
-public class ClientContainerPreviewTooltip implements ClientTooltipComponent {
+public class ClientContainerPreviewTooltip extends ClientTooltipBase {
     private static final Identifier CONTAINER_BACKGROUND = ImprovedTooltips.id("stretchable_container");
 
     private final List<ItemStack> items;
@@ -26,7 +24,12 @@ public class ClientContainerPreviewTooltip implements ClientTooltipComponent {
     private final int height;
 
     public ClientContainerPreviewTooltip(ItemContainerContents contents, int cols, int rows, int color) {
+        //? if >=26.3 {
         this.items = contents.itemCopies().toList();
+        //?} else if >=26.1 {
+        /*this.items = contents.allItemsCopyStream().toList();
+        *///?} else
+        /*this.items = contents.stream().toList();*/
 
         this.cols = cols;
         this.rows = rows;
@@ -38,7 +41,7 @@ public class ClientContainerPreviewTooltip implements ClientTooltipComponent {
 
     @Override
     public void extractImage(@NonNull Font font, int x, int y, int w, int h, @NonNull GuiGraphicsExtractor graphics) {
-        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, CONTAINER_BACKGROUND, x, y, this.width, this.height, this.color);
+        sprite(graphics, CONTAINER_BACKGROUND, x, y, this.width, this.height, this.color);
 
         assemblerLabelsGoBrrr:
         for (int i = 0; i < this.rows; i++) {
@@ -47,7 +50,7 @@ public class ClientContainerPreviewTooltip implements ClientTooltipComponent {
 
                 if (index >= this.items.size()) break assemblerLabelsGoBrrr;
 
-                graphics.item(this.items.get(index), x + j * 18 + 8, y + i * 18 + 8);
+                item(graphics, this.items.get(index), x + j * 18 + 8, y + i * 18 + 8);
             }
         }
     }

@@ -2,13 +2,11 @@ package ua.bonfiremc.improvedtooltips.component.client;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 import ua.bonfiremc.improvedtooltips.ImprovedTooltips;
 
-public class ClientBeesPreviewTooltip implements ClientTooltipComponent {
+public class ClientBeesPreviewTooltip extends ClientTooltipBase {
     public static final Identifier BEE_ACTIVE = ImprovedTooltips.id("bees_and_honey/bee_active");
     public static final Identifier BEE_INACTIVE = ImprovedTooltips.id("bees_and_honey/bee_inactive");
 
@@ -25,7 +23,7 @@ public class ClientBeesPreviewTooltip implements ClientTooltipComponent {
         for (int i = 1; i <= this.maxBees; i++) {
             int xOffset = (i - 1) * 11;
 
-            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, i <= this.bees ? BEE_ACTIVE : BEE_INACTIVE, x + xOffset, y, 9, 9);
+            sprite(graphics, i <= this.bees ? BEE_ACTIVE : BEE_INACTIVE, x + xOffset, y, 9, 9);
         }
     }
 

@@ -3,24 +3,35 @@ package ua.bonfiremc.improvedtooltips.component.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+//? if >=1.21.9 {
 import net.minecraft.data.AtlasIds;
+//?}
 import net.minecraft.network.chat.Component;
+//? if >=1.21.11 {
 import net.minecraft.world.entity.decoration.painting.PaintingVariant;
+//?} else
+/*import net.minecraft.world.entity.decoration.PaintingVariant;*/
+import ua.bonfiremc.improvedtooltips.component.PaintingPreviewTooltip;
 import org.jspecify.annotations.NonNull;
 
-public class ClientPaintingPreviewTooltip implements ClientTooltipComponent {
+public class ClientPaintingPreviewTooltip extends ClientTooltipBase {
+    private final PaintingPreviewTooltip tooltip;
     private final PaintingVariant variant;
     private final TextureAtlasSprite sprite;
 
     private final int textureWidth;
     private final int textureHeight;
 
-    public ClientPaintingPreviewTooltip(PaintingVariant variant) {
+    public ClientPaintingPreviewTooltip(PaintingPreviewTooltip tooltip) {
+        PaintingVariant variant = tooltip.variant();
+
+        this.tooltip = tooltip;
         this.variant = variant;
+        //? if >=1.21.9 {
         this.sprite = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AtlasIds.PAINTINGS).getSprite(variant.assetId());
+        //?} else
+        /*this.sprite = Minecraft.getInstance().getPaintingTextures().get(variant);*/
 
         this.textureWidth = variant.width() * 16;
         this.textureHeight = variant.height() * 16;
@@ -28,36 +39,36 @@ public class ClientPaintingPreviewTooltip implements ClientTooltipComponent {
 
     @Override
     public void extractImage(@NonNull Font font, int x, int y, int w, int h, @NonNull GuiGraphicsExtractor graphics) {
-        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.sprite, x, y, this.textureWidth, this.textureHeight);
+        sprite(graphics, this.sprite, x, y, this.textureWidth, this.textureHeight);
     }
 
     @Override
     public void extractText(@NonNull GuiGraphicsExtractor graphics, @NonNull Font font, int x, int y) {
         int yOffset = 0;
 
-        if (this.variant.title().isPresent()) {
-            graphics.text(font, this.variant.title().get(), x + this.textureWidth + 4, y, -1);
+        if (this.tooltip.title().isPresent()) {
+            text(graphics, font, this.tooltip.title().get(), x + this.textureWidth + 4, y, -1);
 
             yOffset += font.lineHeight + 1;
         }
-        if (this.variant.author().isPresent()) {
-            graphics.text(font, this.variant.author().get(), x + this.textureWidth + 4, y + yOffset, -1);
+        if (this.tooltip.author().isPresent()) {
+            text(graphics, font, this.tooltip.author().get(), x + this.textureWidth + 4, y + yOffset, -1);
 
             yOffset += font.lineHeight + 1;
         }
 
-        graphics.text(font, this.getDimensionsText(), x + this.textureWidth + 4, y + yOffset, -1);
+        text(graphics, font, this.getDimensionsText(), x + this.textureWidth + 4, y + yOffset, -1);
     }
 
     @Override
     public int getWidth(@NonNull Font font) {
         int textWidth = font.width(this.getDimensionsText());
 
-        if (this.variant.title().isPresent()) {
-            textWidth = Math.max(textWidth, font.width(this.variant.title().get()));
+        if (this.tooltip.title().isPresent()) {
+            textWidth = Math.max(textWidth, font.width(this.tooltip.title().get()));
         }
-        if (this.variant.author().isPresent()) {
-            textWidth = Math.max(textWidth, font.width(this.variant.author().get()));
+        if (this.tooltip.author().isPresent()) {
+            textWidth = Math.max(textWidth, font.width(this.tooltip.author().get()));
         }
 
         return this.textureWidth + 4 + textWidth;
@@ -67,10 +78,10 @@ public class ClientPaintingPreviewTooltip implements ClientTooltipComponent {
     public int getHeight(@NonNull Font font) {
         int textHeight = font.lineHeight - 1;
 
-        if (this.variant.title().isPresent()) {
+        if (this.tooltip.title().isPresent()) {
             textHeight += font.lineHeight + 1;
         }
-        if (this.variant.author().isPresent()) {
+        if (this.tooltip.author().isPresent()) {
             textHeight += font.lineHeight + 1;
         }
 

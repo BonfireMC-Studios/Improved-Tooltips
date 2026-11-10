@@ -1,3 +1,4 @@
+//? if >=1.21.5 {
 package ua.bonfiremc.improvedtooltips.mixin.hide_tooltips;
 
 import net.minecraft.core.component.DataComponentGetter;
@@ -22,3 +23,4 @@ public class BeesMixin {
         }
     }
 }
+//?}
