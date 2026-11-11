@@ -19,7 +19,11 @@ public record MapPreviewTooltip(MapId id, MapItemSavedData data) implements Tool
             Level level = Minecraft.getInstance().level;
 
             if (level != null) {
-                return Optional.of(new MapPreviewTooltip(id, MapItem.getSavedData(id, level)));
+                MapItemSavedData data = MapItem.getSavedData(id, level);
+
+                if (data != null) {
+                    return Optional.of(new MapPreviewTooltip(id, data));
+                }
             }
         }
 
