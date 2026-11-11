@@ -2,54 +2,17 @@ plugins {
     alias(libs.plugins.fabric.loom)
 }
 
-val modVersion: String = "1.0.0"
+apply(from = rootProject.file("common.gradle.kts"))
 
-version = "$modVersion+${libs.versions.minecraft.get()}"
-group = "ua.bonfiremc"
-
-loom {
-    accessWidenerPath = file("src/main/resources/improvedtooltips.accesswidener")
-}
-
-repositories {
-    maven("https://maven.isxander.dev/releases")
-    maven("https://maven.terraformersmc.com/")
-}
+val mc = "mc" + project.name.replace(".", "")
+fun mcVersion(name: String) = versionCatalogs.named("libs").findVersion("$mc-$name").get().requiredVersion
 
 dependencies {
-    minecraft(libs.minecraft)
+    minecraft("net.minecraft:minecraft:${mcVersion("minecraft")}")
 
     implementation(libs.fabric.loader)
-    implementation(libs.fabric.api)
+    implementation(libs.fabric.api) { version { require(mcVersion("fabric-api")) } }
 
-    implementation(libs.yacl)
-    implementation(libs.modmenu)
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_25
-    targetCompatibility = JavaVersion.VERSION_25
-}
-
-tasks {
-    processResources {
-        val minecraftVersion = libs.versions.minecraft.get()
-        val fabricLoaderVersion = libs.versions.fabric.loader.get()
-
-        inputs.property("version", version)
-        inputs.property("minecraft_version", minecraftVersion)
-        inputs.property("fabric_loader_version", fabricLoaderVersion)
-
-        filesMatching("fabric.mod.json") {
-            expand(
-                "version" to version,
-                "minecraft_version" to minecraftVersion,
-                "fabric_loader_version" to fabricLoaderVersion
-            )
-        }
-    }
-
-    jar {
-        from("LICENSE")
-    }
+    implementation(libs.yacl) { version { require(mcVersion("yacl")) } }
+    implementation(libs.modmenu) { version { require(mcVersion("modmenu")) } }
 }

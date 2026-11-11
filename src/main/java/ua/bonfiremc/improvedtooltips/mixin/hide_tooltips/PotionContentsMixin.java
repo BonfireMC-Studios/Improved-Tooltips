@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 
 @Mixin(PotionContents.class)
 public class PotionContentsMixin {
-    @Inject(method = "addPotionTooltip", at = @At(value = "INVOKE", target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V", ordinal = 0), cancellable = true)
+    @Inject(method = "addPotionTooltip(Ljava/lang/Iterable;Ljava/util/function/Consumer;FF)V", at = @At(value = "INVOKE", target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V", ordinal = 0), cancellable = true)
     private static void hideTooltip(Iterable<MobEffectInstance> effects, Consumer<Component> lines, float durationScale, float tickrate, CallbackInfo ci) {
         if (ITConfig.instance().mobEffectsPreview) {
             ci.cancel();

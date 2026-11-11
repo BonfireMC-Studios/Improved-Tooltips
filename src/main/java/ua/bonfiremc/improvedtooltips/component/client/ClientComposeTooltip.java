@@ -7,28 +7,44 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
-public record ClientComposeTooltip(List<ClientTooltipComponent> components) implements ClientTooltipComponent {
+public class ClientComposeTooltip extends ClientTooltipBase {
+    private final List<ClientTooltipComponent> components;
+
+    public ClientComposeTooltip(List<ClientTooltipComponent> components) {
+        this.components = components;
+    }
+
     @Override
     public void extractImage(@NonNull Font font, int x, int y, int w, int h, @NonNull GuiGraphicsExtractor graphics) {
         int yOffset = 0;
 
         for (ClientTooltipComponent component : this.components) {
+            //? if >=26.1 {
             component.extractImage(font, x, y + yOffset, w, h, graphics);
+            //?} else if >=1.21.2 {
+            /*component.renderImage(font, x, y + yOffset, w, h, graphics);
+            *///?} else
+            /*component.renderImage(font, x, y + yOffset, graphics);*/
 
-            yOffset += component.getHeight(font);
+            yOffset += height(component, font);
         }
     }
 
+    //? if >=1.21.6 {
     @Override
     public void extractText(@NonNull GuiGraphicsExtractor graphics, @NonNull Font font, int x, int y) {
         int yOffset = 0;
 
         for (ClientTooltipComponent component : this.components) {
+            //? if >=26.1 {
             component.extractText(graphics, font, x, y + yOffset);
+            //?} else
+            /*component.renderText(graphics, font, x, y + yOffset);*/
 
-            yOffset += component.getHeight(font);
+            yOffset += height(component, font);
         }
     }
+    //?}
 
     @Override
     public int getWidth(@NonNull Font font) {
@@ -46,9 +62,16 @@ public record ClientComposeTooltip(List<ClientTooltipComponent> components) impl
         int height = 0;
 
         for (ClientTooltipComponent component : this.components) {
-            height += component.getHeight(font);
+            height += height(component, font);
         }
 
         return height;
+    }
+
+    private static int height(ClientTooltipComponent component, Font font) {
+        //? if >=1.21.2 {
+        return component.getHeight(font);
+        //?} else
+        /*return component.getHeight();*/
     }
 }

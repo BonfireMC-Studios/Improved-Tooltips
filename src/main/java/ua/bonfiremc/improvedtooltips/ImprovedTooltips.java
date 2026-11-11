@@ -1,7 +1,10 @@
 package ua.bonfiremc.improvedtooltips;
 
 import net.fabricmc.api.ClientModInitializer;
+//? if >=26.1 {
 import net.fabricmc.fabric.api.client.rendering.v1.ClientTooltipComponentCallback;
+//?} else
+/*import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;*/
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
@@ -47,7 +50,10 @@ public class ImprovedTooltips implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ITConfig.HANDLER.load();
+        //? if >=26.1 {
         ClientTooltipComponentCallback.EVENT.register(this::toClientComponent);
+        //?} else
+        /*TooltipComponentCallback.EVENT.register(this::toClientComponent);*/
     }
 
     private ClientTooltipComponent toClientComponent(TooltipComponent component) {
@@ -58,13 +64,13 @@ public class ImprovedTooltips implements ClientModInitializer {
             case HoneyPreviewTooltip tooltip -> new ClientHoneyPreviewTooltip(tooltip.honey(), tooltip.maxHoney());
             case MapPreviewTooltip tooltip -> new ClientMapPreviewTooltip(tooltip.id());
             case MobEffectsPreviewTooltip tooltip -> new ClientMobEffectsPreviewTooltip(tooltip.effects(), tooltip.durationScale());
-            case PaintingPreviewTooltip tooltip -> new ClientPaintingPreviewTooltip(tooltip.variant());
+            case PaintingPreviewTooltip tooltip -> new ClientPaintingPreviewTooltip(tooltip);
 
             case ComposeTooltip tooltip -> {
                 List<ClientTooltipComponent> tooltips = new ArrayList<>();
 
                 for (TooltipComponent c : tooltip.components()) {
-                    tooltips.add(this.toClientComponent(c));
+                    tooltips.add(ClientTooltipComponent.create(c));
                 }
 
                 yield new ClientComposeTooltip(tooltips);

@@ -2,9 +2,9 @@
     "required": true,
     "minVersion": "0.8",
     "package": "ua.bonfiremc.improvedtooltips.mixin",
-    "compatibilityLevel": "JAVA_25",
+    "compatibilityLevel": "JAVA_${java_version}",
     "client": [
-        "GuiGraphicsExtractorMixin", "TooltipRenderUtilMixin"
+        "TooltipColorMixin", "TooltipRenderUtilMixin"
     ],
     "injectors": {
         "defaultRequire": 1
@@ -12,5 +12,5 @@
     "overwrites": {
         "requireAnnotations": true
     },
-    "mixins": [ "ItemStackMixin", "hide_tooltips.BeesMixin", "hide_tooltips.BlockItemStatePropertiesMixin", "hide_tooltips.HangingEntityItemMixin", "hide_tooltips.PotionContentsMixin" ]
+    "mixins": [ "ItemStackMixin", "hide_tooltips.HangingEntityItemMixin", "hide_tooltips.PotionContentsMixin", ${extra_mixins} ]
 }
