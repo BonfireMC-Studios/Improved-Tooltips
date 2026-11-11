@@ -62,7 +62,7 @@ public class ImprovedTooltips implements ClientModInitializer {
             case ContainerPreviewTooltip tooltip -> new ClientContainerPreviewTooltip(tooltip.contents(), tooltip.cols(), tooltip.rows(), tooltip.color());
             case FoodPreviewTooltip tooltip -> new ClientFoodPreviewTooltip(tooltip.nutrition(), tooltip.saturation());
             case HoneyPreviewTooltip tooltip -> new ClientHoneyPreviewTooltip(tooltip.honey(), tooltip.maxHoney());
-            case MapPreviewTooltip tooltip -> new ClientMapPreviewTooltip(tooltip.id());
+            case MapPreviewTooltip tooltip -> new ClientMapPreviewTooltip(tooltip.id(), tooltip.data());
             case MobEffectsPreviewTooltip tooltip -> new ClientMobEffectsPreviewTooltip(tooltip.effects(), tooltip.durationScale());
             case PaintingPreviewTooltip tooltip -> new ClientPaintingPreviewTooltip(tooltip);
 

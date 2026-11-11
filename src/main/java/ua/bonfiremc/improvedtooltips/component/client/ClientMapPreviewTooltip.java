@@ -30,22 +30,13 @@ public class ClientMapPreviewTooltip extends ClientTooltipBase {
 
     private final boolean renderBackground = ITConfig.instance().mapBackground;
 
-    public ClientMapPreviewTooltip(MapId id) {
+    public ClientMapPreviewTooltip(MapId id, MapItemSavedData data) {
         this.id = id;
-
-        Level level = Minecraft.getInstance().level;
-
-        this.data = level != null
-            ? MapItem.getSavedData(id, level)
-            : null;
+        this.data = data;
     }
 
     @Override
     public void extractImage(@NonNull Font font, int x, int y, int w, int h, @NonNull GuiGraphicsExtractor graphics) {
-        if (data == null) {
-            return;
-        }
-
         if (this.renderBackground) {
             sprite(graphics, MAP_BACKGROUND, x, y, 140, 140);
         }
