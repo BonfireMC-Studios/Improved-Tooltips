@@ -11,7 +11,7 @@ import net.minecraft.network.chat.Component;
 //? if >=1.21.11 {
 import net.minecraft.world.entity.decoration.painting.PaintingVariant;
 //?} else
-/*import net.minecraft.world.entity.decoration.PaintingVariant;*/
+//import net.minecraft.world.entity.decoration.PaintingVariant;
 import ua.bonfiremc.improvedtooltips.component.PaintingPreviewTooltip;
 import org.jspecify.annotations.NonNull;
 
@@ -31,7 +31,7 @@ public class ClientPaintingPreviewTooltip extends ClientTooltipBase {
         //? if >=1.21.9 {
         this.sprite = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AtlasIds.PAINTINGS).getSprite(variant.assetId());
         //?} else
-        /*this.sprite = Minecraft.getInstance().getPaintingTextures().get(variant);*/
+        //this.sprite = Minecraft.getInstance().getPaintingTextures().get(variant);
 
         this.textureWidth = variant.width() * 16;
         this.textureHeight = variant.height() * 16;

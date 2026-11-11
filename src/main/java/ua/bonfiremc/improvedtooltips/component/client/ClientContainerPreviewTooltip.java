@@ -29,7 +29,7 @@ public class ClientContainerPreviewTooltip extends ClientTooltipBase {
         //?} else if >=26.1 {
         /*this.items = contents.allItemsCopyStream().toList();
         *///?} else
-        /*this.items = contents.stream().toList();*/
+        //this.items = contents.stream().toList();
 
         this.cols = cols;
         this.rows = rows;

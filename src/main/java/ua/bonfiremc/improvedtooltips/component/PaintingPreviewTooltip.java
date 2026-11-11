@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 //? if >=1.21.11 {
 import net.minecraft.world.entity.decoration.painting.PaintingVariant;
 //?} else
-/*import net.minecraft.world.entity.decoration.PaintingVariant;*/
+//import net.minecraft.world.entity.decoration.PaintingVariant;
 //? if <1.21.5 {
 /*import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;

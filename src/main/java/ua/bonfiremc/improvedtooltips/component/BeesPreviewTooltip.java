@@ -18,7 +18,7 @@ public record BeesPreviewTooltip(int bees, int maxBees) implements TooltipCompon
         Bees component = stack.get(DataComponents.BEES);
         var bees = component != null ? component.bees() : null;
         //?} else
-        /*List<BeehiveBlockEntity.Occupant> bees = stack.get(DataComponents.BEES);*/
+        //List<BeehiveBlockEntity.Occupant> bees = stack.get(DataComponents.BEES);
 
         if (bees != null) {
             return Optional.of(new BeesPreviewTooltip(bees.size(), 3));

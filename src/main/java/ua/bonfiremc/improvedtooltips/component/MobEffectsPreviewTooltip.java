@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 //? if <1.21.5
-/*import net.minecraft.world.item.Items;*/
+//import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public record MobEffectsPreviewTooltip(List<MobEffectInstance> effects, float du
             //? if >=1.21.5 {
             float durationScale = stack.getOrDefault(DataComponents.POTION_DURATION_SCALE, 1f);
             //?} else
-            /*float durationScale = stack.is(Items.TIPPED_ARROW) ? 0.125f : stack.is(Items.LINGERING_POTION) ? 0.25f : 1f;*/
+            //float durationScale = stack.is(Items.TIPPED_ARROW) ? 0.125f : stack.is(Items.LINGERING_POTION) ? 0.25f : 1f;
 
             return Optional.of(new MobEffectsPreviewTooltip(effects, durationScale));
         }

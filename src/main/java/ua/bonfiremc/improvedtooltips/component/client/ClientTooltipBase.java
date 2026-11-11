@@ -96,14 +96,14 @@ public abstract class ClientTooltipBase implements ClientTooltipComponent {
         //? if >=26.1 {
         graphics.item(stack, x, y);
         //?} else
-        /*graphics.renderItem(stack, x, y);*/
+        //graphics.renderItem(stack, x, y);
     }
 
     public static void text(GuiGraphicsExtractor graphics, Font font, Component text, int x, int y, int color) {
         //? if >=26.1 {
         graphics.text(font, text, x, y, color);
         //?} else
-        /*graphics.drawString(font, text, x, y, color);*/
+        //graphics.drawString(font, text, x, y, color);
     }
 
     //? if <1.21.2 {

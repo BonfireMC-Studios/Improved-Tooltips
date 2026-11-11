@@ -54,7 +54,7 @@ public abstract class TooltipColorMixin implements ColorExtractor {
     //? if >=26.1 {
     @Inject(method = "componentHoverEffect", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;setTooltipForNextFrame(Lnet/minecraft/client/gui/Font;Ljava/util/List;II)V"))
     //?} else
-    /*@Inject(method = "renderComponentHoverEffect", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;setTooltipForNextFrame(Lnet/minecraft/client/gui/Font;Ljava/util/List;II)V"))*/
+    //@Inject(method = "renderComponentHoverEffect", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;setTooltipForNextFrame(Lnet/minecraft/client/gui/Font;Ljava/util/List;II)V"))
     public void improvedTooltips$getColor(Font font, Style hoveredStyle, int xMouse, int yMouse, CallbackInfo ci) {
         this.improvedTooltips$setHoverColor(hoveredStyle);
     }

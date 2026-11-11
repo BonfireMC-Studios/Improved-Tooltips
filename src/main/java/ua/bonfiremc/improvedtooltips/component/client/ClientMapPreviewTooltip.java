@@ -64,7 +64,7 @@ public class ClientMapPreviewTooltip extends ClientTooltipBase {
         //? if >=26.1 {
         graphics.map(state);
         //?} else
-        /*graphics.submitMapRenderState(state);*/
+        //graphics.submitMapRenderState(state);
 
         stack.popMatrix();
         //?} else {

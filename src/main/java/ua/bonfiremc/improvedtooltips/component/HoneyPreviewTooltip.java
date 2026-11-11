@@ -5,6 +5,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.level.block.BeehiveBlock;
+import net.minecraft.world.level.block.Block;
 
 import java.util.Optional;
 
@@ -18,6 +19,10 @@ public record HoneyPreviewTooltip(int honey, int maxHoney) implements TooltipCom
             if (honey != null) {
                 return Optional.of(new HoneyPreviewTooltip(honey, BeehiveBlock.MAX_HONEY_LEVELS));
             }
+        }
+
+        if (Block.byItem(stack.getItem()) instanceof BeehiveBlock) {
+            return Optional.of(new HoneyPreviewTooltip(0, BeehiveBlock.MAX_HONEY_LEVELS));
         }
 
         return Optional.empty();

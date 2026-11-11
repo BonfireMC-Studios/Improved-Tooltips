@@ -42,11 +42,11 @@ public class TooltipRenderUtilMixin {
     //?} else if >=1.21.6 {
     /*@Redirect(method = "renderTooltipBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blitSprite(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V"))
     *///?} else
-    /*@Redirect(method = "renderTooltipBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blitSprite(Ljava/util/function/Function;Lnet/minecraft/resources/Identifier;IIII)V"))*/
+    //@Redirect(method = "renderTooltipBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blitSprite(Ljava/util/function/Function;Lnet/minecraft/resources/Identifier;IIII)V"))
     //? if >=1.21.6 {
     private static void improvedTooltips$changeTooltipColor(GuiGraphicsExtractor instance, RenderPipeline renderPipeline, Identifier location, int x, int y, int width, int height) {
     //?} else
-    /*private static void improvedTooltips$changeTooltipColor(GuiGraphicsExtractor instance, Function<Identifier, RenderType> renderPipeline, Identifier location, int x, int y, int width, int height) {*/
+    //private static void improvedTooltips$changeTooltipColor(GuiGraphicsExtractor instance, Function<Identifier, RenderType> renderPipeline, Identifier location, int x, int y, int width, int height) {
         if (ITConfig.instance().coloredTooltips && instance instanceof ColorExtractor extractor && improvedTooltips$isDefaultTooltip(location)) {
             instance.blitSprite(renderPipeline, ImprovedTooltips.id(location.getPath()), x, y, width, height, extractor.improvedTooltips$getTooltipColor());
         } else {

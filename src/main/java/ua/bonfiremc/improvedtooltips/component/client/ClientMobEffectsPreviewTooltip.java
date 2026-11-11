@@ -15,7 +15,7 @@ import net.minecraft.world.effect.MobEffectUtil;
 //? if >=1.21.5 {
 import net.minecraft.world.item.alchemy.PotionContents;
 //?} else
-/*import net.minecraft.network.chat.Component;*/
+//import net.minecraft.network.chat.Component;
 import org.jspecify.annotations.NonNull;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class ClientMobEffectsPreviewTooltip extends ClientTooltipBase {
             //?} else if >=1.21.5 {
             /*sprite(graphics, Gui.getMobEffectSprite(effect.getEffect()), x, y + yOffset, 18, 18);
             *///?} else
-            /*sprite(graphics, Minecraft.getInstance().getMobEffectTextures().get(effect.getEffect()), x, y + yOffset, 18, 18);*/
+            //sprite(graphics, Minecraft.getInstance().getMobEffectTextures().get(effect.getEffect()), x, y + yOffset, 18, 18);
 
             yOffset += 22;
         }

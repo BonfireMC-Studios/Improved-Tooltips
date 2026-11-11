@@ -39,7 +39,7 @@ public class ClientComposeTooltip extends ClientTooltipBase {
             //? if >=26.1 {
             component.extractText(graphics, font, x, y + yOffset);
             //?} else
-            /*component.renderText(graphics, font, x, y + yOffset);*/
+            //component.renderText(graphics, font, x, y + yOffset);
 
             yOffset += height(component, font);
         }

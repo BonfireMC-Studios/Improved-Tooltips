@@ -4,7 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 //? if >=26.1 {
 import net.fabricmc.fabric.api.client.rendering.v1.ClientTooltipComponentCallback;
 //?} else
-/*import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;*/
+//import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
@@ -53,7 +53,7 @@ public class ImprovedTooltips implements ClientModInitializer {
         //? if >=26.1 {
         ClientTooltipComponentCallback.EVENT.register(this::toClientComponent);
         //?} else
-        /*TooltipComponentCallback.EVENT.register(this::toClientComponent);*/
+        //TooltipComponentCallback.EVENT.register(this::toClientComponent);
     }
 
     private ClientTooltipComponent toClientComponent(TooltipComponent component) {
