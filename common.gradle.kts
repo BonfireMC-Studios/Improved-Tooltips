@@ -1,4 +1,4 @@
-val modVersion = "1.0.0"
+val modVersion = "1.0.1"
 val javaVersion = property("java").toString().toInt()
 val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
