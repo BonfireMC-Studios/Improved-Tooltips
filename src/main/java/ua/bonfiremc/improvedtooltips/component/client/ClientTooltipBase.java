@@ -68,7 +68,7 @@ public abstract class ClientTooltipBase implements ClientTooltipComponent {
         //?} else if >=1.21.2 {
         /*graphics.blitSprite(RenderType::guiTextured, sprite, x, y, w, h);
         *///?} else
-        /*graphics.blitSprite(sprite, x, y, w, h);*/
+        //graphics.blitSprite(sprite, x, y, w, h);
     }
 
     public static void sprite(GuiGraphicsExtractor graphics, Identifier sprite, int x, int y, int w, int h, int color) {
@@ -89,14 +89,17 @@ public abstract class ClientTooltipBase implements ClientTooltipComponent {
         //?} else if >=1.21.2 {
         /*graphics.blitSprite(RenderType::guiTextured, sprite, x, y, w, h);
         *///?} else
-        /*graphics.blit(x, y, 0, w, h, sprite);*/
+        //graphics.blit(x, y, 0, w, h, sprite);
     }
 
-    public static void item(GuiGraphicsExtractor graphics, ItemStack stack, int x, int y) {
+    public static void item(Font font, GuiGraphicsExtractor graphics, ItemStack stack, int x, int y) {
         //? if >=26.1 {
         graphics.item(stack, x, y);
-        //?} else
-        //graphics.renderItem(stack, x, y);
+        graphics.itemDecorations(font, stack, x, y);
+        //?} else {
+        /*graphics.renderItem(stack, x, y);
+        graphics.renderItemDecorations(font, stack, x, y);
+        *///?}
     }
 
     public static void text(GuiGraphicsExtractor graphics, Font font, Component text, int x, int y, int color) {

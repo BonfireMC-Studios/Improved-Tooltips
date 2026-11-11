@@ -59,8 +59,8 @@ public class TooltipRenderUtilMixin {
         return identifier.equals(BACKGROUND_SPRITE) || identifier.equals(FRAME_SPRITE);
     }
     //?} else {
-    /*
-    @Inject(method = "renderTooltipBackground", at = @At("HEAD"), cancellable = true)
+    
+    /*@Inject(method = "renderTooltipBackground", at = @At("HEAD"), cancellable = true)
     private static void improvedTooltips$changeTooltipColor(GuiGraphicsExtractor graphics, int x, int y, int width, int height, int z, CallbackInfo ci) {
         if (!ITConfig.instance().coloredTooltips || !(graphics instanceof ColorExtractor extractor)) return;
 

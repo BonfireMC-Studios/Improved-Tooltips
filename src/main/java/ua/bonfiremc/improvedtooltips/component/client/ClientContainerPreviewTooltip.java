@@ -50,7 +50,7 @@ public class ClientContainerPreviewTooltip extends ClientTooltipBase {
 
                 if (index >= this.items.size()) break assemblerLabelsGoBrrr;
 
-                item(graphics, this.items.get(index), x + j * 18 + 8, y + i * 18 + 8);
+                item(font, graphics, this.items.get(index), x + j * 18 + 8, y + i * 18 + 8);
             }
         }
     }

@@ -24,7 +24,7 @@ public class ClientComposeTooltip extends ClientTooltipBase {
             //?} else if >=1.21.2 {
             /*component.renderImage(font, x, y + yOffset, w, h, graphics);
             *///?} else
-            /*component.renderImage(font, x, y + yOffset, graphics);*/
+            //component.renderImage(font, x, y + yOffset, graphics);
 
             yOffset += height(component, font);
         }
@@ -72,6 +72,6 @@ public class ClientComposeTooltip extends ClientTooltipBase {
         //? if >=1.21.2 {
         return component.getHeight(font);
         //?} else
-        /*return component.getHeight();*/
+        //return component.getHeight();
     }
 }
